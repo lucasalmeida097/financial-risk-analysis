@@ -1,6 +1,8 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np
+from scipy.stats import norm
 
 def describe_price_data(symbol: str, df: pd.DataFrame) -> None:
     print("📊 Descriptive Statistics:")
@@ -43,3 +45,37 @@ def describe_price_data(symbol: str, df: pd.DataFrame) -> None:
 def calculate_daily_volatility(df: pd.DataFrame) -> float:
     daily_returns = df["adjusted_close"].pct_change().dropna()
     return float(daily_returns.std())
+
+def analyze_daily_returns(symbol: str, df: pd.DataFrame) -> None:
+    daily_returns = df["adjusted_close"].pct_change().dropna()
+
+    print("\n📈 Daily Returns Statistics:")
+    print(daily_returns.describe())
+
+    mean = daily_returns.mean().item()
+    std = daily_returns.std().item()
+    skew = daily_returns.skew().item()
+    kurt = daily_returns.kurt().item()
+
+    print(f"\nMédia: {mean:.4%}")
+    print(f"Desvio Padrão: {std:.4%}")
+    print(f"Assimetria (Skewness): {skew:.4f}")
+    print(f"Curtose (Kurtosis): {kurt:.4f}")
+
+    x = np.linspace(daily_returns.min(), daily_returns.max(), 100)
+    plt.plot(x, norm.pdf(x, mean, std), 'r--', label='Distribuição Normal')
+
+    plt.title(f"Distibuição dos Retornos Diários - {symbol}")
+    plt.xlabel("Retorno Diário")
+    plt.ylabel("Densidade")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+
+
+    plt.figure(figsize=(8, 1.5))
+    sns.boxplot(x=daily_returns.squeeze(), color="lightgreen")
+    plt.title(f"Boxplot  dos Retornos Diários - {symbol}")
+    plt.tight_layout()
+    plt.show()
