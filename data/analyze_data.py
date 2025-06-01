@@ -10,6 +10,8 @@ def describe_price_data(symbol: str, df: pd.DataFrame) -> None:
     print("\n🔎 Additional Metrics:")
     skew = df["adjusted_close"].skew()
     kurt = df["adjusted_close"].kurt()
+    volatility = calculate_daily_volatility(df)
+    print(f"📈 Daily Volatility: {volatility:.4%}")
 
     if isinstance(skew, pd.Series):
         for idx in skew.index:
@@ -21,7 +23,7 @@ def describe_price_data(symbol: str, df: pd.DataFrame) -> None:
 
     plt.figure(figsize=(12, 4))
     plt.plot(df.index, df["adjusted_close"], label="Adjusted Close", color="navy")
-    plt.title(f"{symbol} - Adjusted Close Price (2015 - Hoje)")
+    plt.title(f"{symbol} - Adjusted Close Price (2015 - Today)")
     plt.xlabel("Data")
     plt.ylabel("Preço (R$)")
     plt.grid(True)
@@ -37,3 +39,7 @@ def describe_price_data(symbol: str, df: pd.DataFrame) -> None:
     plt.title(f"Boxplot - Preço Ajustado ({symbol})")
     plt.tight_layout()
     plt.show()
+
+def calculate_daily_volatility(df: pd.DataFrame) -> float:
+    daily_returns = df["adjusted_close"].pct_change().dropna()
+    return float(daily_returns.std())
