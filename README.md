@@ -27,7 +27,7 @@ It focuses on **statistical and visual exploration of daily returns**, making it
 ## 🔗 Access the Project
 
 - 📓 **[Open Notebook](notebooks/statistical_analysis.ipynb)**  
-- 📄 **[Download PDF Report](reports/statistical_analysis_report.pdf)**
+- 📄 **[Download PDF Report](reports/report_statistical_analysis.pdf)**
 
 ---
 
@@ -76,3 +76,5 @@ jupyter nbconvert --to pdf --output report_statistical_analysis statistical_anal
 * **Value at Risk (VaR)** — daily potential loss at 95% confidence
 
 ---
+
+
