@@ -26,7 +26,8 @@ It focuses on **statistical and visual exploration of daily returns**, making it
 
 ## 🔗 Access the Project
 
-- 📓 **[Open Notebook](notebooks/statistical_analysis.ipynb)**  
+- 📓 **[View Jupyter Notebook on nbviewer](https://nbviewer.org/github/lucasalmeida097/financial-risk-analysis/blob/main/notebooks/statistical_analysis.ipynb)**
+- 📓 **[Run on Google Colab](https://colab.research.google.com/github/lucasalmeida097/financial-risk-analysis/blob/main/notebooks/statistical_analysis.ipynb)**  
 - 📄 **[Download PDF Report](reports/report_statistical_analysis.pdf)**
 
 ---
