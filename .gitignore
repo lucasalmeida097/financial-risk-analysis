@@ -1,4 +1,4 @@
 venv
 __pycache__
 *.csv
-.virtual_documents
+.virtual_documents/
